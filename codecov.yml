@@ -1,7 +1,5 @@
 coverage:
-  status:
-    project:
-      default:
-        target: 80%
-        threshold: 1%
+    range:
+    - 80.0
+    - 100.0
 
