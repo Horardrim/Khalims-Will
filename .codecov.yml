@@ -1,0 +1,11 @@
+coverage:
+  status:
+    project:            # 整个项目
+      default:
+        target: 80%     # 目标覆盖率
+        threshold: 1%   # 允许下降 ≤1% 才不报错
+    patch:              # 当前 PR 的改动
+      default:
+        target: 80%
+        threshold: 1%
+
