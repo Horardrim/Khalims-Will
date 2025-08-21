@@ -33,4 +33,12 @@ jobs:
           sudo apt-get install -y valgrind
 
       - name: Do make and verify
-        run: make
+        run: make test
+
+      - name: Generate coverage
+        uses: zgosalvez/github-actions-report-lcov@v1
+        with:
+          coverage-files: output/coverage.refacted.info
+          minimum-coverage: 80
+          artifact-name: code-coverage-report
+
