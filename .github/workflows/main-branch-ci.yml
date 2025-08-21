@@ -32,10 +32,22 @@ jobs:
           sudo apt-get install -y lcov
           sudo apt-get install -y valgrind
 
-      - name: Do make and verify
+      - name: Build test binary
         run: make test
 
+      - name: Check memory leak
+        run: |
+          if grep -q "definitely lost: [1-9][0-9]* bytes" khalims-will.*_vg.log; then
+              cat khalims-will.*_vg.log
+              exit 1
+          fi
+
       - name: Generate coverage
+        run: |
+          lcov -c -d ./output -o output/coverage.info
+          lcov --remove output/coverage.info '*/tests/*' -o output/coverage.refacted.info
+
+      - name: Upload coverage
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
