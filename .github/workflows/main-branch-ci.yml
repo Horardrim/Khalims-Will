@@ -55,7 +55,7 @@ jobs:
           fail_ci_if_error: true
           name: khalims-will-lcov
 
-      - name: post-run
+      - name: Clean environment
         if: always()
         run: |
           make clean
