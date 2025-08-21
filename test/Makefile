@@ -1,6 +1,4 @@
 
-TARGET = khalims-will-test
-
 SRC := $(shell find . -type f -name '*.cxx')
 OBJS := $(SRC:./%.cxx=./$(BUILD_OUTPUT_DIR)/%.o)
 DEPS := $(SRC:./%.cxx=./$(BUILD_OUTPUT_DIR)/%.d)
