@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Horadrim Cube Project CI for main branch
+name: CI for main branch PR of project Khalims-Will 
 
 # Controls when the action will run. 
 on:
