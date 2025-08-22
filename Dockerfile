@@ -8,6 +8,13 @@ ARG VERSION=1.0.0
 
 ENV VERSION=${VERSION}
 
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        libcurl4-openssl-dev \
+        build-essential && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
 COPY output_release/khalims-will.$VERSION khalims-will
 
 ENTRYPOINT ["/app/khalims-will"]
