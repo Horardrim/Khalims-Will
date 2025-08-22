@@ -46,7 +46,7 @@ jobs:
       - name: Generate coverage
         run: |
           lcov -c -d ./output -o output/coverage.info
-          lcov --remove output/coverage.info '*/tests/*' -o output/coverage.refacted.info
+          lcov --ignore-errors unused --remove output/coverage.info '*/tests/*' -o output/coverage.refacted.info
 
       - name: Upload coverage
         uses: codecov/codecov-action@v4
