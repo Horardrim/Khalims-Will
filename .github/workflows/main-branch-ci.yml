@@ -33,7 +33,7 @@ jobs:
           sudo apt-get install -y valgrind
           sudo apt-get install -y libcurl4-openssl-dev
 
-      - name: Build test binary
+      - name: Build test binary and run it
         run: make test
 
       - name: Check memory leak
