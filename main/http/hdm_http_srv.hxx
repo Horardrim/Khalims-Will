@@ -12,6 +12,8 @@ public:
 
     void listen();
 
+    void stop();
+
 private:
     httplib::Server srv_;
 

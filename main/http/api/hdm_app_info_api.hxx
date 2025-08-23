@@ -13,7 +13,7 @@ public:
 private:
     static inline auto REGISTER_HEALTH_API = [](const auto& req, auto& res) {
         (void) req;
-        res.set_content("Hi, this instance is alive", "text/plain");
+        res.set_content("{status:\"UP\"}", "text/plain");
     };
 
     static inline auto REGISTER_INFO_API = [](const auto& req, auto& res) {
