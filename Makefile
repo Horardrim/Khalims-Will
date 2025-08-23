@@ -1,4 +1,4 @@
-VERSION = 1.0.0
+VERSION = 1.1.0
 TARGET=khalims-will
 
 BUILD_OUTPUT_DIR = ../output
@@ -8,7 +8,8 @@ CXXFLAGS = -g -Wall -Werror
 CXXFLAGS_TEST = -g -Wall -Werror -fprofile-arcs -ftest-coverage -DENABLE_UNIT_TEST
 CXXFLAGS_RELEASE = -O3 -DNDEBUG -s -static-libgcc -static-libstdc++ -fstack-protector-strong -D_FORTIFY_SOURCE=2 -Wall -Wextra -Werror
 LDFLAGS = -lgcov -fprofile-arcs -ftest-coverage
-LIBS = -lcurl
+LIBS = -lcurl -lcpp-httplib -pthread
+INCLUDE_PATH = -I ../main
 
 VALGRIND_OUTPUT_FILE = $(TARGET).$(VERSION)_vg.log
 
@@ -18,7 +19,7 @@ all:
 	@make -C main VERSION=$(VERSION) BUILD_OUTPUT_DIR=$(BUILD_OUTPUT_DIR) CXXFLAGS='$(CXXFLAGS)' TARGET=$(TARGET)  LIBS='$(LIBS)'
 
 test:
-	@make -C main VERSION=$(VERSION) BUILD_OUTPUT_DIR=$(BUILD_OUTPUT_DIR) CXXFLAGS='$(CXXFLAGS_TEST)' TARGET=$(TARGET) LDFLAGS='$(LDFLAGS)'  LIBS='$(LIBS)'
+	@make -C main VERSION=$(VERSION) BUILD_OUTPUT_DIR=$(BUILD_OUTPUT_DIR) CXXFLAGS='$(CXXFLAGS_TEST)' TARGET=$(TARGET) LDFLAGS='$(LDFLAGS)'  LIBS='$(LIBS)' INCLUDE_PATH='$(INCLUDE_PATH)'
 	@valgrind --leak-check=full --log-file=$(VALGRIND_OUTPUT_FILE) ./output/$(TARGET).$(VERSION)
 
 release:
