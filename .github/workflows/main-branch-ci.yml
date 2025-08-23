@@ -27,6 +27,12 @@ jobs:
         run: |
           gcc -v
 
+      - name: Cache apt packages
+        uses: actions/cache@v3
+        with:
+          path: /var/cache/apt/archives/*.deb
+          key: ${{ runner.os }}-apt-${{ hashFiles('apt-packages.txt') }}
+
       - name: Install tools
         run: |
           sudo apt-get install -y lcov
