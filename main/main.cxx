@@ -17,9 +17,6 @@ int main(int argc, char ** argv)
     #endif
 
     HdmHttpSrv srv;
-    srv.listen();
-    std::mutex deadLock;
-    deadLock.lock();
-    deadLock.lock();
+    
     return 0;
 }
