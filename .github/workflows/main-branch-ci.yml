@@ -33,6 +33,9 @@ jobs:
           sudo apt-get install -y valgrind
           sudo apt-get install -y libcurl4-openssl-dev
 
+      - name: Build a release binary
+        run: make release && make clean
+
       - name: Build test binary and run it
         run: make test
 

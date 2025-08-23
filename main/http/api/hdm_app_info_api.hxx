@@ -1,0 +1,30 @@
+#ifndef HDM_APP_INFO_API_HXX
+#define HDM_APP_INFO_API_HXX
+
+#include "httplib.h"
+
+class HdmAppInfoAPI
+{
+public:
+    HdmAppInfoAPI() = delete;
+    ~HdmAppInfoAPI() = delete;
+    static void registerAPI(httplib::Server & srv);
+
+private:
+    static inline auto REGISTER_HEALTH_API = [](const auto& req, auto& res) {
+        (void) req;
+        res.set_content("Hi, this instance is alive", "text/plain");
+    };
+
+    static inline auto REGISTER_INFO_API = [](const auto& req, auto& res) {
+        res.set_content("{\"echo\":" + req.body + "}", "application/json");
+    };
+};
+
+void HdmAppInfoAPI::registerAPI(httplib::Server & srv)
+{
+    srv.Get("/health", HdmAppInfoAPI::REGISTER_HEALTH_API);
+    srv.Get("/info", HdmAppInfoAPI::REGISTER_INFO_API);
+}
+
+#endif
