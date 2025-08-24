@@ -10,6 +10,7 @@ ENV VERSION=${VERSION}
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
+        libcpp-httplib-dev \
         libcurl4-openssl-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*

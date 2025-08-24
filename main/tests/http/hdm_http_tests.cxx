@@ -4,7 +4,7 @@
 
 #include "hdm_http_tests.hxx"
 
-void HdmHttpTests::runTests()
+void HdmHttpTest::runTests()
 {
     std::thread([&srv = srv_] {
         std::this_thread::sleep_for(std::chrono::seconds(5));
