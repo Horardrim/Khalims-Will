@@ -40,17 +40,15 @@ jobs:
           sudo apt-get install -y libcurl4-openssl-dev
           sudo apt install -y libcpp-httplib-dev
 
-      - name: Setting environment variable
-        run: |
-          export EUREKA_HOST="mock.eureka.com"
-          export EUREKA_PORT="8761"
-          export APPLICATION_NAME="khalmis-will"
-
       - name: Build a release binary
         run: make release && make clean
 
       - name: Build test binary and run it
-        run: make test
+        run: |
+          export EUREKA_HOST=mock.eureka.com
+          export EUREKA_PORT=8761
+          export APPLICATION_NAME=khalmis-will
+          make test
 
       - name: Check memory leak
         run: |
