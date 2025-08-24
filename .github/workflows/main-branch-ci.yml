@@ -43,8 +43,8 @@ jobs:
       - name: Setting environment variable
         run: |
           export EUREKA_HOST="mock.eureka.com"
-          export EUREKA_PORT=8761
-          export APPLICATION_NAME=khalmis-will
+          export EUREKA_PORT="8761"
+          export APPLICATION_NAME="khalmis-will"
 
       - name: Build a release binary
         run: make release && make clean
