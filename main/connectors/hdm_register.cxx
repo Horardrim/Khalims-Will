@@ -76,8 +76,7 @@ bool HdmRegCenConnector::perform(
 
         CURLcode res = curl_easy_perform(curl);
 
-        delete hdrs;
-        hdrs = nullptr;
+        curl_slist_free_all(hdrs);
         if (res != CURLE_OK) {
             std::cerr << curl_easy_strerror(res) << std::endl;
             curl_easy_cleanup(curl);
