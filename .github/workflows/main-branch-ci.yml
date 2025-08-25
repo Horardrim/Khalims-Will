@@ -44,7 +44,11 @@ jobs:
         run: make release && make clean
 
       - name: Build test binary and run it
-        run: make test
+        run: |
+          export EUREKA_HOST=mock.eureka.com
+          export EUREKA_PORT=8761
+          export APPLICATION_NAME=khalmis-will
+          make test
 
       - name: Check memory leak
         run: |

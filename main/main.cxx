@@ -1,30 +1,49 @@
 #include <iostream>
 #include <mutex>
 
-#include <curl/curl.h>
-
-#include "http/hdm_http_srv.hxx"
+volatile bool ON_GOINE_G = false;
 
 #ifdef ENABLE_UNIT_TEST
-#include "tests/http/hdm_http_tests.hxx"
+  #include "tests/http/hdm_http_tests.hxx"
+  #include "tests/connectors/hdm_register_test.hxx"
+#else
+  #include "connectors/hdm_register.hxx"
+  #include "http/hdm_http_srv.hxx"
 #endif
 
 int main(int argc, char ** argv)
 {
-    (void) argc, (void) argv;
-    CURL *curl = curl_easy_init();
-    (void) curl;
-    
-    #ifdef ENABLE_UNIT_TEST
+#ifdef ENABLE_UNIT_TEST
 
     std::cout << "current cplusplus standard is:" << std::endl;
     std::cout << __cplusplus << std::endl;
-    HdmHttpTests httpTests;
-    httpTests.runTests();
 
-    #endif
+    HdmHttpTest httpTest;
+    httpTest.runTests();
 
-    HdmHttpSrv srv;
-    
+    HdmRegCenConnectorsTest registerCenterTest;
+    registerCenterTest.runTests();
+
+#else
+    (void) argc, (void) argv;
+    HdmRegCenConnector eurekaConnector;
+    eurekaConnector.Register();
+    ON_GOINE_G = true;
+
+    // http server thread
+    HdmHttpSrv httpSrv;
+    std::thread([&srv = httpSrv] {
+        srv.listen();
+    }).detach();
+
+    while (ON_GOINE_G) {
+        std::this_thread::sleep_for(std::chrono::seconds(30));
+        eurekaConnector.heartbeat();
+    }
+
+    httpSrv.stop();
+    eurekaConnector.unregister();
+#endif
+
     return 0;
 }

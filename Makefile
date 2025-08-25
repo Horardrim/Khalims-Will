@@ -1,4 +1,4 @@
-VERSION = 1.1.0
+VERSION = 1.2.0
 TARGET=khalims-will
 
 BUILD_OUTPUT_DIR = ../output
@@ -30,6 +30,9 @@ clean:
 
 docker:
 	@docker build --build-arg VERSION=$(VERSION) -t hdm/$(TARGET):$(VERSION) .
+
+podman:
+	@podman build --build-arg VERSION=$(VERSION) -t hdm.io/$(TARGET):$(VERSION) .
 
 .PHONY: all release clean docker
 

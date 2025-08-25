@@ -5,11 +5,11 @@
 
 #include "http/hdm_http_srv.hxx"
 
-class HdmHttpTests
+class HdmHttpTest
 {
 public:
-    HdmHttpTests() = default;
-    ~HdmHttpTests() = default;
+    HdmHttpTest() = default;
+    ~HdmHttpTest() = default;
 
     void runTests();
 

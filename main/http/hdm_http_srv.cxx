@@ -9,7 +9,7 @@ HdmHttpSrv::HdmHttpSrv()
 
 void HdmHttpSrv::listen()
 {
-    srv_.listen(HTTP_HOST, 8088);
+    srv_.listen(HTTP_HOST, 8080);
 }
 
 void HdmHttpSrv::stop()

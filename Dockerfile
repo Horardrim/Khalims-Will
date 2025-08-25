@@ -10,11 +10,13 @@ ENV VERSION=${VERSION}
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
+        libcpp-httplib-dev \
         libcurl4-openssl-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 COPY output_release/khalims-will.$VERSION khalims-will
 
-ENTRYPOINT ["/app/khalims-will"]
+EXPOSE 8080
 
+ENTRYPOINT ["/app/khalims-will"]
