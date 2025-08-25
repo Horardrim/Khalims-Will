@@ -94,7 +94,33 @@ bool HdmRegCenConnector::performRegister(
 
 void HdmRegCenConnector::heartbeat() const
 {
+    // [Q] To do check curl_ is nullptr?
 
+    curl_easy_reset(curl_);
+    curl_easy_setopt(curl_, CURLOPT_URL, registerAppUrl_.c_str());
+    curl_easy_setopt(curl_, CURLOPT_CUSTOMREQUEST, "PUT");
+
+    // call back function to write response to a buffer
+    Buffer buf;
+    curl_easy_setopt(curl_, CURLOPT_WRITEFUNCTION, Buffer::write);
+    curl_easy_setopt(curl_, CURLOPT_WRITEDATA, &buf);
+
+    // do request
+    long httpCode = 0;
+    CURLcode res = curl_easy_perform(curl_);
+    curl_easy_getinfo(curl_, CURLINFO_RESPONSE_CODE, &httpCode);
+
+    if (res == CURLE_OK && (httpCode == 200 || httpCode == 204))
+    {
+        std::cout << "put heart beat success!" << std::endl;
+    }
+    else
+    {
+        std::cerr << "put heart beat failed!" << std::endl;
+        std::cerr << "res: " << res << std::endl;
+        std::cerr << "http code: " << httpCode << std::endl;
+        std::cerr << "err message: " << buf.data << std::endl;
+    }
 }
 
 void HdmRegCenConnector::unregister() const
@@ -121,9 +147,9 @@ void HdmRegCenConnector::unregister() const
     }
     else
     {
+        std::cerr << "unregister failed!" << std::endl;
         std::cerr << "res: " << res << std::endl;
         std::cerr << "http code: " << httpCode << std::endl;
         std::cerr << "err message: " << buf.data << std::endl;
-        std::cerr << "unregister failed!" << std::endl;
     }
 }

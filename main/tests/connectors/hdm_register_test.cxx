@@ -7,6 +7,16 @@
 void HdmRegCenConnectorsTest::runTests()
 {
     register_.Register();
+
+    std::this_thread::sleep_for(std::chrono::seconds(3));
+    register_.heartbeat();
+
+    std::this_thread::sleep_for(std::chrono::seconds(3));
+    register_.heartbeat();
+
+    std::this_thread::sleep_for(std::chrono::seconds(3));
+    register_.heartbeat();
+
     std::this_thread::sleep_for(std::chrono::seconds(3));
     register_.unregister();
 }

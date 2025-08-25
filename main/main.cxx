@@ -1,6 +1,8 @@
 #include <iostream>
 #include <mutex>
 
+volatile bool ON_GOINE_G = false;
+
 #ifdef ENABLE_UNIT_TEST
   #include "tests/http/hdm_http_tests.hxx"
   #include "tests/connectors/hdm_register_test.hxx"
@@ -26,13 +28,19 @@ int main(int argc, char ** argv)
     (void) argc, (void) argv;
     HdmRegCenConnector eurekaConnector;
     eurekaConnector.Register();
+    ON_GOINE_G = true;
 
+    // http server thread
     HdmHttpSrv httpSrv;
     std::thread([&srv = httpSrv] {
         srv.listen();
     }).detach();
 
-    std::this_thread::sleep_for(std::chrono::seconds(10));
+    while (ON_GOINE_G) {
+        std::this_thread::sleep_for(std::chrono::seconds(30));
+        eurekaConnector.heartbeat();
+    }
+
     httpSrv.stop();
     eurekaConnector.unregister();
 #endif

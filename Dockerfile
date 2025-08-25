@@ -17,5 +17,6 @@ RUN apt-get update && \
 
 COPY output_release/khalims-will.$VERSION khalims-will
 
-ENTRYPOINT ["/app/khalims-will"]
+EXPOSE 8080
 
+ENTRYPOINT ["/app/khalims-will"]
