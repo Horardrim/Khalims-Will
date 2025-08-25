@@ -12,22 +12,24 @@
 class HdmRegCenConnector
 {
 public:
-    HdmRegCenConnector() = default;
+    HdmRegCenConnector();
 
-    ~HdmRegCenConnector() = default;
+    ~HdmRegCenConnector();
 
-    void connect();
+    void Register() const;
 
     void heartbeat() const;
 
+    void unregister() const;
+
 private:
-    std::string registerCenterUrl_;
+    const std::string registerUrl_;
 
-    void registerWithUrl(const std::string& url, const short& port);
+    const std::string registerAppUrl_;
 
-    void unregisterWithUrl(const std::string& url, const short& port) const;
+    CURL *curl_;
 
-    bool perform(const std::string& method, const std::string& url, const std::string& body) const;
+    bool performRegister(const std::string& url, const std::string& body) const;
 };
 
 #endif

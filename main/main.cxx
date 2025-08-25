@@ -11,7 +11,7 @@
 
 int main(int argc, char ** argv)
 {
-    #ifdef ENABLE_UNIT_TEST
+#ifdef ENABLE_UNIT_TEST
 
     std::cout << "current cplusplus standard is:" << std::endl;
     std::cout << __cplusplus << std::endl;
@@ -22,19 +22,20 @@ int main(int argc, char ** argv)
     HdmRegCenConnectorsTest registerCenterTest;
     registerCenterTest.runTests();
 
-    #else
+#else
     (void) argc, (void) argv;
     HdmRegCenConnector eurekaConnector;
-    eurekaConnector.connect();
+    eurekaConnector.Register();
 
     HdmHttpSrv httpSrv;
     std::thread([&srv = httpSrv] {
         srv.listen();
     }).detach();
 
-    std::this_thread::sleep_for(std::chrono::seconds(60));
-    // httpSrv.stop();
-    #endif
-    
+    std::this_thread::sleep_for(std::chrono::seconds(10));
+    httpSrv.stop();
+    eurekaConnector.unregister();
+#endif
+
     return 0;
 }
