@@ -7,8 +7,8 @@
 class HdmEurekaConfig
 {
 public:
-    static inline std::string EUREKA_HOST = std::getenv("EUREKA_HOST");
-    static inline short EUREKA_PORT = atoi(std::getenv("EUREKA_PORT"));
+    static inline const std::string EUREKA_HOST = std::getenv("EUREKA_HOST");
+    static inline const short EUREKA_PORT = atoi(std::getenv("EUREKA_PORT"));
 };
 
 #endif

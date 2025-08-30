@@ -8,6 +8,7 @@ volatile bool ON_GOINE_G = false;
   #include "tests/connectors/hdm_register_test.hxx"
 #else
   #include "connectors/hdm_register.hxx"
+  #include "connectors/hdm_pg.hxx"
   #include "http/hdm_http_srv.hxx"
 #endif
 
@@ -28,6 +29,9 @@ int main(int argc, char ** argv)
     (void) argc, (void) argv;
     HdmRegCenConnector eurekaConnector;
     eurekaConnector.Register();
+
+    HdmPostgresConnector pg_connector;
+    std::cout << "connection of postgres is " << pg_connector.connected() << std::endl;
     ON_GOINE_G = true;
 
     // http server thread
