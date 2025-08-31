@@ -12,6 +12,7 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         libcpp-httplib-dev \
         libpqxx-dev libpq-dev \
+        libhiredis-dev \
         libcurl4-openssl-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*

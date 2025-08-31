@@ -9,6 +9,7 @@ volatile bool ON_GOINE_G = false;
 #else
   #include "connectors/hdm_register.hxx"
   #include "connectors/hdm_pg.hxx"
+  #include "connectors/hdm_redis.hxx"
   #include "http/hdm_http_srv.hxx"
 #endif
 
@@ -32,6 +33,9 @@ int main(int argc, char ** argv)
 
     HdmPostgresConnector pg_connector;
     std::cout << "connection of postgres is " << pg_connector.connected() << std::endl;
+
+    HdmRedisConnector redis_connector;
+    redis_connector.validate();
     ON_GOINE_G = true;
 
     // http server thread
