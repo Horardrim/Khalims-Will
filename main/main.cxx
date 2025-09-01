@@ -6,6 +6,9 @@ volatile bool ON_GOINE_G = false;
 #ifdef ENABLE_UNIT_TEST
   #include "tests/http/hdm_http_tests.hxx"
   #include "tests/connectors/hdm_register_test.hxx"
+  #include "tests/connectors/hdm_redis_test.hxx"
+  #include "tests/connectors/hdm_pg_test.hxx"
+  #include "tests/connectors/hdm_rabbitmq_test.hxx"
 #else
   #include "connectors/hdm_register.hxx"
   #include "connectors/hdm_pg.hxx"
@@ -26,6 +29,15 @@ int main(int argc, char ** argv)
 
     HdmRegCenConnectorsTest registerCenterTest;
     registerCenterTest.runTests();
+
+    HdmPostgresConnectorTest pgConnTest;
+    pgConnTest.runTests();
+
+    HdmRedisConnectorTest redisConnTest;
+    redisConnTest.runTests();
+
+    HdmRabbitMQConnectorTest rabbitMQConnTest;
+    rabbitMQConnTest.runTests();
 
 #else
     (void) argc, (void) argv;

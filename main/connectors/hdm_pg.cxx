@@ -15,7 +15,10 @@ HdmPostgresConnector::HdmPostgresConnector()
 
 HdmPostgresConnector::~HdmPostgresConnector()
 {
-    conn_.get()->close();
+    if (conn_.get() == nullptr)
+    {
+        conn_.get()->close();
+    }
 }
 
 bool HdmPostgresConnector::connected() const
