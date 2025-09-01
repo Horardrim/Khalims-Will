@@ -15,7 +15,7 @@ HdmPostgresConnector::HdmPostgresConnector()
 
 HdmPostgresConnector::~HdmPostgresConnector()
 {
-    if (conn_.get() == nullptr)
+    if (conn_.get() != nullptr)
     {
         conn_.get()->close();
     }
