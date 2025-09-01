@@ -8,7 +8,7 @@ CXXFLAGS = -g -Wall -Werror
 CXXFLAGS_TEST = -g -Wall -Werror -fprofile-arcs -ftest-coverage -DENABLE_UNIT_TEST
 CXXFLAGS_RELEASE = -O3 -DNDEBUG -s -static-libgcc -static-libstdc++ -fstack-protector-strong -D_FORTIFY_SOURCE=2 -Wall -Wextra -Werror
 LDFLAGS = -lgcov -fprofile-arcs -ftest-coverage
-LIBS = -lcurl -lcpp-httplib -lpqxx -lpq -lhiredis -pthread
+LIBS = -lcurl -lcpp-httplib -lpqxx -lpq -lhiredis -lrabbitmq -pthread
 INCLUDE_PATH = -I ../main
 
 VALGRIND_OUTPUT_FILE = $(TARGET).$(VERSION)_vg.log

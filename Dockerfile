@@ -13,6 +13,7 @@ RUN apt-get update && \
         libcpp-httplib-dev \
         libpqxx-dev libpq-dev \
         libhiredis-dev \
+        librabbitmq-dev \
         libcurl4-openssl-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
