@@ -27,7 +27,7 @@ release:
 
 clean:
 	@rm -rf ${notdir $(BUILD_OUTPUT_DIR)} ${notdir $(BUILD_OUTPUT_DIR_RELEASE)} $(VALGRIND_OUTPUT_FILE) $(TARGET)_$(VERSION).tar
-	@podman rmi hdm.io/$(TARGET):$(VERSION)
+	@podman rmi --ignore non-existent-image hdm.io/$(TARGET):$(VERSION)
 
 docker:
 	@docker build --build-arg VERSION=$(VERSION) -t hdm/$(TARGET):$(VERSION) .
