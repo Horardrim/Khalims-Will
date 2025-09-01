@@ -50,6 +50,8 @@ void HdmRegCenConnector::Register() const
     }
     else
     {
+        std::cerr << "eureka host size: " << HdmEurekaConfig::EUREKA_HOST.size() << std::endl;
+        std::cerr << "eureka url: " << registerUrl_ << std::endl;
         std::cerr << "register failed!" << std::endl;
     }
 }

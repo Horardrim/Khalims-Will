@@ -11,6 +11,9 @@ ENV VERSION=${VERSION}
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         libcpp-httplib-dev \
+        libpqxx-dev libpq-dev \
+        libhiredis-dev \
+        librabbitmq-dev \
         libcurl4-openssl-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
@@ -19,4 +22,4 @@ COPY output_release/khalims-will.$VERSION khalims-will
 
 EXPOSE 8080
 
-ENTRYPOINT ["/app/khalims-will"]
+ENTRYPOINT sh -c 'if [ -f /hdm_back_door/khalims_will_env.sh ]; then . /hdm_back_door/khalims_will_env.sh; echo "POSTGRES_HOST: " $POSTGRES_HOST; fi; exec /app/khalims-will'

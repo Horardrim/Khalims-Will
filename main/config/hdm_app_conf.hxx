@@ -7,9 +7,9 @@
 class HdmAppConfig
 {
 public:
-    static inline std::string APP_NAME = std::getenv("APPLICATION_NAME");
+    static inline const std::string APP_NAME = std::getenv("APPLICATION_NAME");
 
-    static inline short APP_PORT = 8080;
+    static inline const short APP_PORT = 8080;
 };
 
 #endif
