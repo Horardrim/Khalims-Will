@@ -15,6 +15,12 @@ HdmRedisConnector::~HdmRedisConnector()
 void HdmRedisConnector::validate()
 {
     redisReply *r = (redisReply*)redisCommand(redisClient_, "PING");
+
+    if (r == nullptr)
+    {
+        std::cerr << "run PING request to redis failed." << std::endl;
+        return;
+    }
     std::cout << "PING: " << r->str << std::endl;
     freeReplyObject(r);
 }
