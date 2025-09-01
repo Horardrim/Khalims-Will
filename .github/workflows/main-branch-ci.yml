@@ -39,6 +39,9 @@ jobs:
           sudo apt-get install -y valgrind
           sudo apt-get install -y libcurl4-openssl-dev
           sudo apt install -y libcpp-httplib-dev
+          sudo apt install -y libpqxx-dev libpq-dev
+          sudo apt install -y libhiredis-dev
+          sudo apt install -y librabbitmq-dev
 
       - name: Build a release binary
         run: make release && make clean
