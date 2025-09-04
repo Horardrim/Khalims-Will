@@ -22,6 +22,7 @@ jobs:
       postgres:
         image: postgres:16
         env:
+          POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
         ports:
           - 5432:5432
@@ -85,11 +86,11 @@ jobs:
           export EUREKA_HOST=mock.eureka.com
           export EUREKA_PORT=8761
 
-          export POSTGRES_HOST=postgres2
+          export POSTGRES_HOST=postgres
           export POSTGRES_PORT=5432
           export POSTGRES_DATABASE=postgres
           export POSTGRES_USERNAME=postgres
-          export POSTGRES_PASSWD=ma3aY03h1!
+          export POSTGRES_PASSWD=postgres
 
           export REDIS_HOST=redis
           export REDIS_PORT=6379
