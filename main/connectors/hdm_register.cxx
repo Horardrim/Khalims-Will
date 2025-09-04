@@ -32,14 +32,14 @@ void HdmRegCenConnector::Register() const
 {
     const std::string body = R"({
   "instance": {
-    "instanceId": ")" + HdmAppConfig::APP_NAME + ":" + std::to_string(HdmAppConfig::APP_PORT) + R"(",
-    "hostName": ")" + HdmAppConfig::APP_NAME + R"(",
+    "instanceId": ")" + HdmAppConfig::HOST_NAME + ":" + std::to_string(HdmAppConfig::APP_PORT) + R"(",
+    "hostName": ")" + HdmAppConfig::HOST_NAME + R"(",
     "app": ")" + HdmAppConfig::APP_NAME + R"(",
-    "ipAddr": ")" + HdmAppConfig::APP_NAME + R"(",
+    "ipAddr": ")" + HdmAppConfig::HOST_NAME + R"(",
     "status": "UP",
     "port": { "$": )" + std::to_string(HdmAppConfig::APP_PORT) + R"(, "@enabled": true },
-    "healthCheckUrl": ")" + HdmAppConfig::APP_NAME + ':' + std::to_string(HdmAppConfig::APP_PORT) + R"(/health",
-    "homePageUrl": ")" + HdmAppConfig::APP_NAME + ':' + std::to_string(HdmAppConfig::APP_PORT) + R"(/info",
+    "healthCheckUrl": ")" + HdmAppConfig::HOST_NAME + ':' + std::to_string(HdmAppConfig::APP_PORT) + R"(/health",
+    "homePageUrl": ")" + HdmAppConfig::HOST_NAME + ':' + std::to_string(HdmAppConfig::APP_PORT) + R"(/info",
     "dataCenterInfo": { "@class": "com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo", "name": "MyOwn" }
   }
 })";
