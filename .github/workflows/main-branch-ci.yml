@@ -86,6 +86,8 @@ jobs:
           export EUREKA_HOST=mock.eureka.com
           export EUREKA_PORT=8761
 
+          export HOST_NAME=$(hostname)
+
           export POSTGRES_HOST=localhost
           export POSTGRES_PORT=5432
           export POSTGRES_DATABASE=postgres
